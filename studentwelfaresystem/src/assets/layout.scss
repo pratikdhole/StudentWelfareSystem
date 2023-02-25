@@ -1,0 +1,39 @@
+.headeer {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 11%);
+
+    .logincde {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+
+        ul {
+            margin: 0;
+
+            li {
+                padding: 0 8px;
+                list-style: none;
+                font-size: 13px;
+
+            }
+
+            li.propertybroker {
+                background-color: #093766;
+                padding: 4px 9px;
+                color: #e7e7e7;
+            }
+
+        }
+
+    }
+}
+
+
+.footer-section {
+    background-color: #303846;
+    color: #fff;
+
+    a {
+        color: #fff;
+    }
+}
