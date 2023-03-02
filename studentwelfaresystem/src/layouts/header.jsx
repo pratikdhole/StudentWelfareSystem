@@ -27,7 +27,7 @@ return (
                                 <ul className='d-flex'>
                                     <li className='propertybroker'>For Property Owners</li>
                                     <li><Link to="./login" className='navlink'>Login</Link></li>
-                                    <li><Link to={'/about'} className='navlink'>Sign Up</Link></li>
+                                    <li><Link to='/about' className='navlink'>Sign Up</Link></li>
                                  </ul>
                             </div>
                         </div>
