@@ -9,7 +9,10 @@ function Footer() {
                         <div className="col-lg-6 col-md-12 mb-4 mb-md-0">
                             <h5 className="text-uppercase">StudentWelfareSystem</h5>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nunc sit amet nibh facilisis sodales. Donec euismod, mauris ac posuere volutpat, ipsum nisi fringilla nunc, vitae maximus enim ex quis purus.
+                                Student Welfare System is here in your service. Our team is continously working to give best
+                                possible solution to your day to day needs in efficient. At start, we are introducing the
+                                paying guest service which is well verified by our team members. We constantly strive for the
+                                quality. We always believe that customer satisfaction is our satisfaction. Stay tuned for more services.
                             </p>
                         </div>
                         <div className="col-lg-3 col-md-6 mb-4 mb-md-0">

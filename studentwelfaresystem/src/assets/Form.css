@@ -1,0 +1,13 @@
+.wrapper{
+    height: 118vh;
+}
+
+.formstyle{
+    width: 400px;
+    height: min-content;
+    border-radius: 5px;
+    color: black;
+    padding: 20px;
+    background-color: rgb(221, 214, 214);
+    text-align: left;
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import FilterProperty from './FilterProperty';
 import Propertylist from './Propertylist';
-import  './Sellandbuyproperty.scss'
+import  '../assets/Sellandbuyproperty.scss'
 
 function Sellandbuyproperty() {
     return (

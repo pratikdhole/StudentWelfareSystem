@@ -1,68 +1,19 @@
-import React, { useState } from 'react'
-import '../assets/Form.css'
-
-function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [errors, setErrors] = useState({});
-
-  let handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-    const passwordValue = event.target.value;
-    setPassword(passwordValue);
-
-    if (passwordValue.length >= 8) {
-      setIsPasswordValid(true);
-    } else {
-      setIsPasswordValid(false);
-    }
-  };
-
-  let handleEmailChange = (event) => {
-    const emailValue = event.target.value;
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
-    setEmail(emailValue);
-
-    if (emailPattern.test(emailValue)) {
-      setIsEmailValid(true);
-    } else {
-      setIsEmailValid(false);
-    }
-  }
-
-  let handlePasswordChange = (event) => {
-    const passwordValue = event.target.value;
-    setPassword(passwordValue);
-
-    if (passwordValue.length >= 8) {
-      setIsPasswordValid(true);
-    } else {
-      setIsPasswordValid(false);
-    }
-  }
-
-  return (
-    <div className='wrapper bg-dark d-flex align-items-center justify-content-center w-100'>
-      <div className='formstyle rounded'>
-        <h2 className='mb-3'>Login</h2>
+<div className='wrapper bg-dark d-flex align-items-center justify-content-center w-100'>
+      <div className='login rounded'>
+        <h2 className='mb-3'>Enter login details</h2>
         <form onSubmit={handleSubmit}>
-          <div className='mb-3'>
+          <div className='form-group mb-4'>
             <label htmlFor='email' className='form-label' >Email address </label>
             <input type="email" id="email" value={email} className='form-control'
               onChange={handleEmailChange} placeholder='Enter email' required autoFocus />
             {isEmailValid ? null : <p className='alert alert-danger'>Please enter a valid email</p>}
           </div>
-          <div className='mb-3'>
+          <div className='form-group mb-4'>
             <label htmlFor='password' className='form-label'>Password </label>
             <input type="password" id="password" value={password} className='form-control'
               onChange={handlePasswordChange} placeholder='Enter password' required />
             {isPasswordValid ? null : <p className='alert alert-danger'>Password must be at least 8 characters</p>}
           </div>
-
           {/* <div className='form-group mb-4'>
             <label htmlFor='confirm_password' className='form-label'>Confirm password </label>
             <input type="password" id="confirm_password" value={confirmPassword} className='form-control'
@@ -73,7 +24,7 @@ function Login() {
               }} placeholder='Re-enter password' required />
             {errors.confirmPassword && (<p className='alert alert-danger' role='alert'>{errors.confirmPassword}</p>)}
           </div> */}
-          <div className='mb-3 form-check'>
+          <div className='form-group form-check mb-4'>
             <input type="checkbox" className='form-check-input' />
             <label htmlFor='check' className='form-check-label'>Remeber login</label>
           </div>
@@ -81,7 +32,3 @@ function Login() {
         </form>
       </div>
     </div>
-  )
-}
-
-export default Login
