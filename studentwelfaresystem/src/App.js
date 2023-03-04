@@ -1,11 +1,12 @@
 import './App.css';
-import Header from './layouts/Header'
+import Header from './layouts/Header';
 import { Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import Signup from './pages/Signup'
 import Home from './pages/Home';
-import login from './pages/login'
 import Footer from './layouts/Footer';
+import Postproperty from './pages/Postproperty';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/login' element={<login />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/postproperty' element={<Postproperty />} />
         </Routes>
         <Footer />
       </div>

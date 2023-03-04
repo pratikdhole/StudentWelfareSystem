@@ -25,9 +25,9 @@ return (
                             <div className='logincde'>
 
                                 <ul className='d-flex'>
-                                    <li className='propertybroker'>For Property Owners</li>
+                                    <li><Link to="./postproperty" className='navlink'>Post your PG rooms</Link></li>
                                     <li><Link to="./login" className='navlink'>Login</Link></li>
-                                    <li><Link to='/about' className='navlink'>Sign Up</Link></li>
+                                    <li><Link to='/signup' className='navlink'>Sign Up</Link></li>
                                  </ul>
                             </div>
                         </div>
