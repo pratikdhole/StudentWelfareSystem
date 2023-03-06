@@ -1,5 +1,4 @@
 import '../assets/layout.scss'
-import logo from '../logo.svg';
 import { Link } from "react-router-dom";
 import React ,{ useState } from 'react';
 
@@ -23,11 +22,13 @@ return (
                                 </ul>
                             </div>
                             <div className='logincde'>
-
+ 
                                 <ul className='d-flex'>
+                                    <li><Link to ="./viewproperty" className='navlink'>View Property</Link></li>
                                     <li><Link to="./postproperty" className='navlink'>Post your PG rooms</Link></li>
                                     <li><Link to="./login" className='navlink'>Login</Link></li>
                                     <li><Link to='/signup' className='navlink'>Sign Up</Link></li>
+                                    
                                  </ul>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from "react";
-import '../assets/Form.css'
-import '../assets/style.scss'
+import '../assets/Form.scss'
+import '../assets/Style.scss'
 const Postproperty = () => {
     const [title, setTitle] = useState("");
     const [type, setType] = useState("");

@@ -7,6 +7,9 @@ import Home from './pages/Home';
 import Footer from './layouts/Footer';
 import Postproperty from './pages/Postproperty';
 import Login from './pages/Login';
+import ViewProperty from './pages/ViewProperty';
+
+
 
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/postproperty' element={<Postproperty />} />
+          <Route path ='/viewproperty' element ={<ViewProperty />} />
         </Routes>
         <Footer />
       </div>

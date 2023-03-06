@@ -1,6 +1,6 @@
 import React from 'react'
 import Sellandbuyproperty from './Sellandbuyproperty'
-import '../assets/Home.css'
+import '../assets/Home.scss'
 
 function HeroSection() {
   return (
