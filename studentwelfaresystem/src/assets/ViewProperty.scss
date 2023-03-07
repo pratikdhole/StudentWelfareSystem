@@ -1,0 +1,85 @@
+.property-listing {
+    display:block;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 30px;
+  }
+  
+  .property-card {
+    background-color: white;
+    border: 2px;
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    width: 70vw;
+    height:auto;
+    padding: 10px;
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  }
+  
+  .property-card img {
+    padding: 5px;
+    height: 200px;
+    width: 30%;
+    background-color: rgb(182, 182, 182);
+  }
+  
+  .property-details {
+    display:flex;
+    flex-direction: column;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid rgb(187, 187, 187);
+    width: 18vw;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    h1{
+      margin:auto;
+      color:black;
+      font-size: xx-large;
+      font-weight: 900;
+      background-color: aquamarine;
+    }
+
+    h5{
+      color:black;
+    font-weight: bold;
+    }
+
+    h4{
+      color: black;
+      font-weight: 900;
+    }
+  }
+  
+  .property-amenities {
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px double rgb(187, 187, 187);
+    width: 22vw;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+  }
+
+  .property-amenity-list-1{
+    display:flex;
+    flex-direction: row;
+    text-align: center;
+    height: 16vh;
+    border: 1px solid rgb(187, 187, 187);
+  }
+
+  .amenity-box{
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    width: 12vw;
+    border: 1px solid rgb(187, 187, 187);
+    justify-content: center;
+  }
+  
+  .contact-box{
+    margin: auto;
+    padding: 15px;
+  }
+  

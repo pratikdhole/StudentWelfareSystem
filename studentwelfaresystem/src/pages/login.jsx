@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import '../assets/Form.css'
+import '../assets/Form.scss'
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [errors, setErrors] = useState({});
 
   let handleSubmit = (event) => {
     event.preventDefault();
@@ -46,7 +45,7 @@ function Login() {
   }
 
   return (
-    <div className='wrapper bg-dark d-flex align-items-center justify-content-center w-100'>
+    <div className='d-flex align-items-center justify-content-center w-100'>
       <div className='formstyle rounded'>
         <h2 className='mb-3'>Login</h2>
         <form onSubmit={handleSubmit}>
