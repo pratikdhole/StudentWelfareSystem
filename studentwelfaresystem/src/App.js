@@ -1,10 +1,10 @@
 import './App.css';
-import Header from './layouts/Header';
+import Header from './layout/Header';
 import { Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import Signup from './pages/Signup'
 import Home from './pages/Home';
-import Footer from './layouts/Footer';
+import Footer from './layout/Footer';
 import Postproperty from './pages/Postproperty';
 import Login from './pages/Login';
 import ViewProperty from './pages/ViewProperty';
