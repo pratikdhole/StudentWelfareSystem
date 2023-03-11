@@ -65,4 +65,4 @@ const Postproperty = () => {
     );
 };
 
-export default Postproperty;
+export default UploadPG;
