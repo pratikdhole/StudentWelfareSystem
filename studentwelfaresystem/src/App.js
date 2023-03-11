@@ -1,14 +1,11 @@
 import './App.css';
-import Header from './layout/Header';
+import Header from './layouts/Header'
 import { Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import Signup from './pages/Signup'
 import Home from './pages/Home';
-import Footer from './layout/Footer';
-import Postproperty from './pages/Postproperty';
-import ViewProperty from './pages/ViewProperty';
-import "bootstrap/dist/css/bootstrap.min.css"
-import Login from './pages/login';
+import Login from './pages/Login'
+import Footer from './layouts/Footer';
 
 function App() {
   return (
