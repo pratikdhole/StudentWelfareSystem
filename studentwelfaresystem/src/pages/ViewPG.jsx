@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import '../assets/ViewProperty.scss';
+import '../assets/ViewPG.scss';
 import room1 from '../images/room1.jpg'
 import room2 from '../images/room2.jpg'
-import FilterProperty from './FilterProperty';
 import washingmachine from '../images/washingmachine.png'
-import wifi from '../images/wifi.jpg'
+import wifi from '../images/wifi.png'
 import waterfilter from '../images/waterfilter.png'
 import furniture from '../images/furniture.png'
-import '../assets/FilterProperty.scss'
 
-const ViewProperty = () => {
+const ViewPG = () => {
     const [properties, setProperties] = useState([
         {
             name: 'Atharv PG',
@@ -44,7 +42,7 @@ const ViewProperty = () => {
     return (
         <div className='row'>
             <div className='col-md-2 filter-container bg-dark justify-content-center'>
-                <FilterProperty />
+                filter
             </div>
             <div className='col-md-10 property-listing'>
                 {properties.map((property) => (
@@ -87,4 +85,4 @@ const PropertyCard = ({ name, address, image, price, size, bathrooms, bedrooms }
     );
 };
 
-export default ViewProperty;
+export default ViewPG;

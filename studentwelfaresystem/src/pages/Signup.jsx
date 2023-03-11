@@ -1,96 +1,85 @@
-import React, { useState } from 'react'
-import '../assets/Form.scss'
+import React from "react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Row,
+} from "reactstrap";
 
-function Signup() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [phone, setPhone] = useState();
-    const [isEmailValid, setIsEmailValid] = useState(true);
-    const [isPasswordValid, setIsPasswordValid] = useState(true);
-    const [errors, setErrors] = useState({});
-
-    let handleSubmit = (event) => {
-        event.preventDefault();
-        const passwordValue = event.target.value;
-        setPassword(passwordValue);
-
-        if (passwordValue.length >= 8) {
-            setIsPasswordValid(true);
-        } else {
-            setIsPasswordValid(false);
-        }
-    };
-
-    let handleEmailChange = (event) => {
-        const emailValue = event.target.value;
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
-        setEmail(emailValue);
-
-        if (emailPattern.test(emailValue)) {
-            setIsEmailValid(true);
-        } else {
-            setIsEmailValid(false);
-        }
-    }
-
-    let handlePasswordChange = (event) => {
-        const passwordValue = event.target.value;
-        setPassword(passwordValue);
-
-        if (passwordValue.length >= 8) {
-            setIsPasswordValid(true);
-        } else {
-            setIsPasswordValid(false);
-        }
-    }
-
-    return (
-        <div className='mt-4 mb-4 d-flex align-items-center justify-content-center w-100'>
-            <div className='formstyle rounded'>
-                <h2 className='mb-3'>Registration</h2>
-                <form onSubmit={handleSubmit} className='row'>
-                    <div className='col-md-6 text-start mt-3 mb-3'>
-                        <label htmlFor='name' className='form-label' >User Name </label>
-                        <input type="text" id="name" value={name} className='form-control'
-                            onChange={(e) => setName(e.target.value)} placeholder='Enter name' required autoFocus />
-                    </div>
-                    <div className='col-md-6 text-start mt-3 mb-3'>
-                        <label htmlFor='email' className='form-label' >Email address </label>
-                        <input type="email" id="email" value={email} className='form-control'
-                            onChange={handleEmailChange} placeholder='Enter email' required />
-                        {isEmailValid ? null : <p className='alert alert-danger'>Please enter a valid email</p>}
-                    </div>
-                    <div className='col-md-6 text-start mt-3 mb-3'>
-                        <label htmlFor='password' className='form-label'>Password </label>
-                        <input type="password" id="password" value={password} className='form-control'
-                            onChange={handlePasswordChange} placeholder='Enter password' required />
-                        {isPasswordValid ? null : <p className='alert alert-danger'>Password must be at least 8 characters</p>}
-                    </div>
-
-                    <div className='col-md-6 text-start mt-3 mb-3 form-group'>
-                        <label htmlFor='confirm_password' className='form-label'>Confirm password </label>
-                        <input type="password" id="confirm_password" value={confirmPassword} className='form-control'
-                            onChange={(event) => setConfirmPassword(event.target.value)}
-                            onBlur={() => {
-                                if (password !== confirmPassword) setErrors({ confirmPassword: 'Passwords must be matched' });
-                                else setErrors({});
-                            }} placeholder='Re-enter password' required />
-                        {errors.confirmPassword && (<p className='alert alert-danger' role='alert'>{errors.confirmPassword}</p>)}
-                    </div>
-                    <div className='col-md-6 text-start mt-3 mb-3 form-group'>
-                        <label htmlFor='phone' className='form-label' >Mobile number </label>
-                        <input type="tel" id="phone" value={phone} className='form-control'
-                            onChange={(e) => setPhone(e.target.value)} placeholder='Enter mobile number' optional />
-                    </div>
-                    <div>
-                        <button type="submit" className="btn btn-success mt-2" disabled={!isEmailValid || !isPasswordValid}>Register</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    )
+export default function Signup() {
+  return (
+    <Container className="mt-3 mb-3">
+      <Row>
+        <Col sm={{ size: 6, offset: 3 }}>
+          <Card className="shadow">
+            <CardHeader className="text-center">
+              <h3>Register here..!</h3>
+            </CardHeader>
+            <CardBody>
+              <Form>
+                {/* Name field */}
+                <FormGroup>
+                  <Label for="name">Enter fullname</Label>
+                  <Input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    invalid={false}
+                    autoFocus
+                  />
+                  {/* <div>Name is required.</div> */}
+                </FormGroup>
+                {/* Email field */}
+                <FormGroup>
+                  <Label for="email">Enter email</Label>
+                  <Input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email address"
+                    invalid={false}
+                  />
+                  {/* <div>Email is required.</div> */}
+                </FormGroup>
+                {/* Password field */}
+                <FormGroup>
+                  <Label for="password">Enter password</Label>
+                  <Input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    invalid={false}
+                  />
+                  {/* <div>Password is required.</div> */}
+                </FormGroup>
+                {/* contact field */}
+                <FormGroup>
+                  <Label for="contact">Enter mobile number</Label>
+                  <Input
+                    type="tel"
+                    id="contact"
+                    placeholder="Enter mobile number"
+                    invalid={false}
+                  />
+                  {/* <div>Mobile number is required.</div> */}
+                </FormGroup>
+                <Container className="text-center">
+                  <Button color="outline-success">Register</Button>
+                  <Button color="outline-danger" className="ms-2">
+                    Reset
+                  </Button>
+                </Container>
+              </Form>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
-
-export default Signup

@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from "react";
 import '../assets/Form.scss'
 import '../assets/Style.scss'
-const Postproperty = () => {
+const UploadPG = () => {
     const [title, setTitle] = useState("");
     const [rent, setRent] = useState("");
     const [vacancy, setVacancy] = useState("");
@@ -65,4 +65,4 @@ const Postproperty = () => {
     );
 };
 
-export default Postproperty;
+export default UploadPG;
