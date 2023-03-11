@@ -1,45 +1,100 @@
 import React from "react";
-import { Button, Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
+import { Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
 
-export default function login() {
+export default function Login() {
   return (
-    <Container className="mt-3 mb-3">
-      <Row>
-        <Col sm={{size:6,offset:3}}>
-          <Card>
-            <CardHeader className="text-center">
-            <h3>Welcome to PG World..!</h3>
-            </CardHeader>
-            <CardBody>
-              <Form autoComplete ="off">
-                <FormGroup>
-                  <Label for="email">Email</Label>
-                  <Input
-                  type="email"
-                  id="email"
-                  placeholder="Enter email"
-                  invalid={false}
-                  autoFocus
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="password">Password</Label>
-                  <Input
-                  type="password"
-                  id="password"
-                  placeholder="Enter password"
-                  invalid={false}
-                  />
-                </FormGroup>
-                <Container className="text-center">
-                  <Button color="outline-success">Submit</Button>
-                  <Button color="outline-danger" className="ms-2">Reset</Button>
-                </Container>
-              </Form>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+<Card
+    className="my-2"
+    color="secondary"
+    outline
+    
+    style={{
+      width: '38rem'
+    }}
+  >
+    <CardHeader>
+      Header
+    </CardHeader>
+    <CardBody>
+      <CardTitle tag="h5">
+        Special Title Treatment
+      </CardTitle>
+      <CardText>
+      <Form>
+        <Row>
+          <Col md={6}>
+            <FormGroup>
+              <Label for="exampleEmail">Email</Label>
+              <Input
+                id="exampleEmail"
+                name="email"
+                placeholder="with a placeholder"
+                type="email"
+              />
+            </FormGroup>
+          </Col>
+          <Col md={6}>
+            <FormGroup>
+              <Label for="examplePassword">Password</Label>
+              <Input
+                id="examplePassword"
+                name="password"
+                placeholder="password placeholder"
+                type="password"
+              />
+            </FormGroup>
+          </Col>
+        </Row>
+        <FormGroup>
+          <Label for="exampleAddress">Address</Label>
+          <Input
+            id="exampleAddress"
+            name="address"
+            placeholder="1234 Main St"
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="exampleAddress2">Address 2</Label>
+          <Input
+            id="exampleAddress2"
+            name="address2"
+            placeholder="Apartment, studio, or floor"
+          />
+        </FormGroup>
+        <Row>
+          <Col md={6}>
+            <FormGroup>
+              <Label for="exampleCity">City</Label>
+              <Input id="exampleCity" name="city" />
+            </FormGroup>
+          </Col>
+          <Col md={4}>
+            <FormGroup>
+              <Label for="exampleState">State</Label>
+              <Input id="exampleState" name="state" />
+            </FormGroup>
+          </Col>
+          <Col md={2}>
+            <FormGroup>
+              <Label for="exampleZip">Zip</Label>
+              <Input id="exampleZip" name="zip" />
+            </FormGroup>
+          </Col>
+        </Row>
+        <FormGroup check>
+          <Input id="exampleCheck" name="check" type="checkbox" />
+          <Label check for="exampleCheck">
+            Check me out
+          </Label>
+        </FormGroup>
+        <Button>Sign in</Button>
+      </Form>
+      </CardText>
+    </CardBody>
+  </Card>
+
+
+
+      
   );
 }

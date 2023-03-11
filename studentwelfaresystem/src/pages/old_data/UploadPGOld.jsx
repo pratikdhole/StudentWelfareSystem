@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from "react";
 import '../assets/Form.scss'
-import '../assets/Style.scss'
-const UploadPG = () => {
+import '../assets/style.scss'
+const Postproperty = () => {
     const [title, setTitle] = useState("");
     const [rent, setRent] = useState("");
     const [vacancy, setVacancy] = useState("");

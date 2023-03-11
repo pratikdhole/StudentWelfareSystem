@@ -1,15 +1,14 @@
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import ViewPG from "./pages/ViewPG";
-import UploadPG from "./pages/UploadPG";
-import Header from "./layouts/Header";
-import { Routes, Route } from "react-router-dom";
-import About from "./pages/About";
-import Signup from "./pages/Signup";
-import Home from "./pages/Home";
-import Footer from "./layouts/Footer";
-import Login from "./pages/Login";
-import Base from "./layouts/Base";
+import './App.css';
+import Header from './layout/Header';
+import { Routes, Route } from 'react-router-dom';
+import About from './pages/About';
+import Signup from './pages/Signup'
+import Home from './pages/Home';
+import Footer from './layout/Footer';
+import Postproperty from './pages/Postproperty';
+import ViewProperty from './pages/ViewProperty';
+import "bootstrap/dist/css/bootstrap.min.css"
+import Login from './pages/login';
 
 function App() {
   return (
