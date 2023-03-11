@@ -9,7 +9,7 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Footer from "./layouts/Footer";
 import Login from "./pages/Login";
-import Base from "./layouts/Base";
+
 
 function App() {
   return (
