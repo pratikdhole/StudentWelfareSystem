@@ -1,84 +1,151 @@
-import React, { useState } from 'react'
-import '../assets/Form.scss'
+import { useState } from "react";
+import { toast } from "react-toastify";
+import {
+  Label,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Row,
+  Button,
+} from "reactstrap";
+import { loginUser } from "../services/user-service";
+import { doLogin } from "./auth";
+import { useNavigate } from "react-router-dom";
+import userContext from "./context/userContext";
+import { useContext } from "react";
 
-function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
+const Login = () => {
+  const userContxtData = useContext(userContext);
 
-  let handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-    const passwordValue = event.target.value;
-    setPassword(passwordValue);
+  const navigate = useNavigate();
 
-    if (passwordValue.length >= 8) {
-      setIsPasswordValid(true);
-    } else {
-      setIsPasswordValid(false);
-    }
+  const [loginDetail, setLoginDetail] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleChange = (event, field) => {
+    let actualValue = event.target.value;
+    setLoginDetail({
+      ...loginDetail,
+      [field]: actualValue,
+    });
   };
 
-  let handleEmailChange = (event) => {
-    const emailValue = event.target.value;
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
-    setEmail(emailValue);
+  const handleReset = () => {
+    setLoginDetail({
+      username: "",
+      password: "",
+    });
+  };
 
-    if (emailPattern.test(emailValue)) {
-      setIsEmailValid(true);
-    } else {
-      setIsEmailValid(false);
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    console.log(loginDetail);
+    //validation
+    if (
+      loginDetail.username.trim() == "" ||
+      loginDetail.password.trim() == ""
+    ) {
+      toast.error("Username or Password  is required !!");
+      return;
     }
-  }
 
-  let handlePasswordChange = (event) => {
-    const passwordValue = event.target.value;
-    setPassword(passwordValue);
+    //submit the data to server to generate token
+    loginUser(loginDetail)
+      .then((data) => {
+        console.log(data);
 
-    if (passwordValue.length >= 8) {
-      setIsPasswordValid(true);
-    } else {
-      setIsPasswordValid(false);
-    }
-  }
+        //save the data to localstorage
+        doLogin(data, () => {
+          console.log("login detail is saved to localstorage");
+          //redirect to user dashboard page
+          userContxtData.setUser({
+            data: data.user,
+            login: true,
+          });
+          navigate("/user/dashboard");
+        });
+
+        toast.success("Login Success");
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status == 400 || error.response.status == 404) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("Something went wrong  on sever !!");
+        }
+      });
+  };
 
   return (
-    <div className='d-flex align-items-center justify-content-center w-100'>
-      <div className='formstyle rounded'>
-        <h2 className='mb-3'>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className='mb-3'>
-            <label htmlFor='email' className='form-label' >Email address </label>
-            <input type="email" id="email" value={email} className='form-control'
-              onChange={handleEmailChange} placeholder='Enter email' required autoFocus />
-            {isEmailValid ? null : <p className='alert alert-danger'>Please enter a valid email</p>}
-          </div>
-          <div className='mb-3'>
-            <label htmlFor='password' className='form-label'>Password </label>
-            <input type="password" id="password" value={password} className='form-control'
-              onChange={handlePasswordChange} placeholder='Enter password' required />
-            {isPasswordValid ? null : <p className='alert alert-danger'>Password must be at least 8 characters</p>}
-          </div>
+    <div>
+      <Container>
+        <Row className="mt-4">
+          <Col
+            sm={{
+              size: 6,
+              offset: 3,
+            }}
+          >
+            <Card color="dark" inverse>
+              <CardHeader>
+                <h3>Login Here !!</h3>
+              </CardHeader>
 
-          {/* <div className='form-group mb-4'>
-            <label htmlFor='confirm_password' className='form-label'>Confirm password </label>
-            <input type="password" id="confirm_password" value={confirmPassword} className='form-control'
-              onChange={(event) => setConfirmPassword(event.target.value)}
-              onBlur={() => {
-                if (password !== confirmPassword) setErrors({ confirmPassword: 'Passwords must be matched' });
-                else setErrors({});
-              }} placeholder='Re-enter password' required />
-            {errors.confirmPassword && (<p className='alert alert-danger' role='alert'>{errors.confirmPassword}</p>)}
-          </div> */}
-          <div className='mb-3 form-check'>
-            <input type="checkbox" className='form-check-input' />
-            <label htmlFor='check' className='form-check-label'>Remeber login</label>
-          </div>
-          <button type="submit" className="btn btn-success mt-2" disabled={!isEmailValid || !isPasswordValid}>Sign-in</button>
-        </form>
-      </div>
+              <CardBody>
+                <Form onSubmit={handleFormSubmit}>
+                  {/* Email field */}
+
+                  <FormGroup>
+                    <Label for="email">Enter Email</Label>
+                    <Input
+                      type="text"
+                      id="email"
+                      value={loginDetail.username}
+                      onChange={(e) => handleChange(e, "username")}
+                    />
+                  </FormGroup>
+
+                  {/* password field */}
+
+                  <FormGroup>
+                    <Label for="password">Enter password</Label>
+                    <Input
+                      type="password"
+                      id="password"
+                      value={loginDetail.password}
+                      onChange={(e) => handleChange(e, "password")}
+                    />
+                  </FormGroup>
+
+                  <Container className="text-center">
+                    <Button color="light" outline>
+                      Login
+                    </Button>
+                    <Button
+                      onClick={handleReset}
+                      className="ms-2"
+                      outline
+                      color="secondary"
+                    >
+                      Reset
+                    </Button>
+                  </Container>
+                </Form>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
-  )
-}
+  );
+};
+
+export default Login;

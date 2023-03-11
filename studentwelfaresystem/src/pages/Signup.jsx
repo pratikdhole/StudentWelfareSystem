@@ -1,94 +1,222 @@
-import React from 'react'
-import { Card, Container } from 'reactstrap'
+import { useState } from "react";
+import { signUp } from "../services/user-service";
+import { toast } from "react-toastify";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Container,
+  Form,
+  FormFeedback,
+  FormGroup,
+  Input,
+  Label,
+  Row,
+} from "reactstrap";
 
-function Signup() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [phone, setPhone] = useState();
-    const [isEmailValid, setIsEmailValid] = useState(true);
-    const [isPasswordValid, setIsPasswordValid] = useState(true);
-    const [errors, setErrors] = useState({});
+const Signup = () => {
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    user_contact: "",
+    about: "",
+  });
 
-    let handleSubmit = (event) => {
-        event.preventDefault();
-        const passwordValue = event.target.value;
-        setPassword(passwordValue);
+  const [error, setError] = useState({
+    errors: {},
+    isError: false,
+  });
 
-        if (passwordValue.length >= 8) {
-            setIsPasswordValid(true);
-        } else {
-            setIsPasswordValid(false);
-        }
-    };
+  // handle change
+  const handleChange = (event, property) => {
+    //dynamic setting the values
+    setData({ ...data, [property]: event.target.value });
+  };
 
-    let handleEmailChange = (event) => {
-        const emailValue = event.target.value;
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
-        setEmail(emailValue);
+  //reseting the form
+  const resetData = () => {
+    setData({
+      name: "",
+      email: "",
+      password: "",
+      user_contact: "",
+      about: "",
+    });
+  };
 
-        if (emailPattern.test(emailValue)) {
-            setIsEmailValid(true);
-        } else {
-            setIsEmailValid(false);
-        }
-    }
+  //submit the form
+  const submitForm = (event) => {
+    event.preventDefault();
 
-    let handlePasswordChange = (event) => {
-        const passwordValue = event.target.value;
-        setPassword(passwordValue);
+    // if(error.isError){
+    //   toast.error("Form data is invalid , correct all details then submit. ");
+    //   setError({...error,isError:false})
+    //   return;
+    // }
 
-        if (passwordValue.length >= 8) {
-            setIsPasswordValid(true);
-        } else {
-            setIsPasswordValid(false);
-        }
-    }
+    console.log(data);
+    //data validate
 
-    return (
-        <div className='mt-4 mb-4 d-flex align-items-center justify-content-center w-100'>
-            <div className='formstyle rounded'>
-                <h2 className='mb-3'>Registration</h2>
-                <form onSubmit={handleSubmit} className='row'>
-                    <div className='col-md-6 text-start mt-3 mb-3'>
-                        <label htmlFor='name' className='form-label' >User Name </label>
-                        <input type="text" id="name" value={name} className='form-control'
-                            onChange={(e) => setName(e.target.value)} placeholder='Enter name' required autoFocus />
-                    </div>
-                    <div className='col-md-6 text-start mt-3 mb-3'>
-                        <label htmlFor='email' className='form-label' >Email address </label>
-                        <input type="email" id="email" value={email} className='form-control'
-                            onChange={handleEmailChange} placeholder='Enter email' required />
-                        {isEmailValid ? null : <p className='alert alert-danger'>Please enter a valid email</p>}
-                    </div>
-                    <div className='col-md-6 text-start mt-3 mb-3'>
-                        <label htmlFor='password' className='form-label'>Password </label>
-                        <input type="password" id="password" value={password} className='form-control'
-                            onChange={handlePasswordChange} placeholder='Enter password' required />
-                        {isPasswordValid ? null : <p className='alert alert-danger'>Password must be at least 8 characters</p>}
-                    </div>
+    //call server api for sending data
+    signUp(data)
+      .then((resp) => {
+        console.log(resp);
+        console.log("success log");
+        toast.success("User is registered successfully !! user id " + resp.id);
+        setData({
+          name: "",
+          email: "",
+          password: "",
+          about: "",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("Error log");
+        //handle errors in proper way
+        setError({
+          errors: error,
+          isError: true,
+        });
+      });
+  };
 
-                    <div className='col-md-6 text-start mt-3 mb-3 form-group'>
-                        <label htmlFor='confirm_password' className='form-label'>Confirm password </label>
-                        <input type="password" id="confirm_password" value={confirmPassword} className='form-control'
-                            onChange={(event) => setConfirmPassword(event.target.value)}
-                            onBlur={() => {
-                                if (password !== confirmPassword) setErrors({ confirmPassword: 'Passwords must be matched' });
-                                else setErrors({});
-                            }} placeholder='Re-enter password' required />
-                        {errors.confirmPassword && (<p className='alert alert-danger' role='alert'>{errors.confirmPassword}</p>)}
-                    </div>
-                    <div className='col-md-6 text-start mt-3 mb-3 form-group'>
-                        <label htmlFor='phone' className='form-label' >Mobile number </label>
-                        <input type="tel" id="phone" value={phone} className='form-control'
-                            onChange={(e) => setPhone(e.target.value)} placeholder='Enter mobile number' optional />
-                    </div>
-                    <div>
-                        <button type="submit" className="btn btn-success mt-2" disabled={!isEmailValid || !isPasswordValid}>Register</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    )
-}
+  return (
+    <div>
+      <Container>
+        <Row className="mt-4">
+          {/* { JSON.stringify(data) } */}
+
+          <Col sm={{ size: 6, offset: 3 }}>
+            <Card color="dark" inverse>
+              <CardHeader>
+                <h3> Fill Information to Register !!</h3>
+              </CardHeader>
+
+              <CardBody>
+                {/* creating form */}
+
+                <Form onSubmit={submitForm}>
+                  {/* Name field */}
+                  <FormGroup>
+                    <Label for="name">Enter Name</Label>
+                    <Input
+                      type="text"
+                      placeholder="Enter here"
+                      id="name"
+                      onChange={(e) => handleChange(e, "name")}
+                      value={data.name}
+                      invalid={
+                        error.errors?.response?.data?.name ? true : false
+                      }
+                    />
+
+                    <FormFeedback>
+                      {error.errors?.response?.data?.name}
+                    </FormFeedback>
+                  </FormGroup>
+
+                  {/* email field */}
+                  <FormGroup>
+                    <Label for="email">Enter Email</Label>
+                    <Input
+                      type="email"
+                      placeholder="Enter here"
+                      id="email"
+                      onChange={(e) => handleChange(e, "email")}
+                      value={data.email}
+                      invalid={
+                        error.errors?.response?.data?.email ? true : false
+                      }
+                    />
+
+                    <FormFeedback>
+                      {error.errors?.response?.data?.email}
+                    </FormFeedback>
+                  </FormGroup>
+
+                  {/* password field */}
+                  <FormGroup>
+                    <Label for="password">Enter password</Label>
+                    <Input
+                      type="password"
+                      placeholder="Enter here"
+                      id="password"
+                      onChange={(e) => handleChange(e, "password")}
+                      value={data.password}
+                      invalid={
+                        error.errors?.response?.data?.password ? true : false
+                      }
+                    />
+
+                    <FormFeedback>
+                      {error.errors?.response?.data?.password}
+                    </FormFeedback>
+                  </FormGroup>
+
+                  {/* contact field */}
+                  <FormGroup>
+                    <Label for="user_contact">Enter phone</Label>
+                    <Input
+                      type="number"
+                      placeholder="Enter here"
+                      id="user_contact"
+                      onChange={(e) => handleChange(e, "user_contact")}
+                      value={data.phone}
+                      invalid={
+                        error.errors?.response?.data?.user_contact ? true : false
+                      }
+                    />
+
+                    <FormFeedback>
+                      {error.errors?.response?.data?.phone}
+                    </FormFeedback>
+                  </FormGroup>
+
+                  {/* about field */}
+                  <FormGroup>
+                    <Label for="about">Write something about yourself</Label>
+                    <Input
+                      type="textarea"
+                      placeholder="Enter here"
+                      id="about"
+                      style={{ height: "250px" }}
+                      onChange={(e) => handleChange(e, "about")}
+                      value={data.about}
+                      invalid={
+                        error.errors?.response?.data?.about ? true : false
+                      }
+                    />
+
+                    <FormFeedback>
+                      {error.errors?.response?.data?.about}
+                    </FormFeedback>
+                  </FormGroup>
+
+                  <Container className="text-center">
+                    <Button outline color="light">
+                      Register
+                    </Button>
+                    <Button
+                      onClick={resetData}
+                      color="secondary"
+                      type="reset"
+                      className="ms-2"
+                    >
+                      Reset
+                    </Button>
+                  </Container>
+                </Form>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
+};
+
+export default Signup;
