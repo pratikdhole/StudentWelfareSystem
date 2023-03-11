@@ -1,87 +1,100 @@
-import React, { useState } from 'react'
-import '../assets/Form.scss'
+import React from "react";
+import { Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
 
-function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [errors, setErrors] = useState({});
-
-  let handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-    const passwordValue = event.target.value;
-    setPassword(passwordValue);
-
-    if (passwordValue.length >= 8) {
-      setIsPasswordValid(true);
-    } else {
-      setIsPasswordValid(false);
-    }
-  };
-
-  let handleEmailChange = (event) => {
-    const emailValue = event.target.value;
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
-    setEmail(emailValue);
-
-    if (emailPattern.test(emailValue)) {
-      setIsEmailValid(true);
-    } else {
-      setIsEmailValid(false);
-    }
-  }
-
-  let handlePasswordChange = (event) => {
-    const passwordValue = event.target.value;
-    setPassword(passwordValue);
-
-    if (passwordValue.length >= 8) {
-      setIsPasswordValid(true);
-    } else {
-      setIsPasswordValid(false);
-    }
-  }
-
+export default function login() {
   return (
-    <div className='wrapper bg-dark d-flex align-items-center justify-content-center w-100'>
-      <div className='formstyle rounded'>
-        <h2 className='mb-3'>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className='mb-3'>
-            <label htmlFor='email' className='form-label' >Email address </label>
-            <input type="email" id="email" value={email} className='form-control'
-              onChange={handleEmailChange} placeholder='Enter email' required autoFocus />
-            {isEmailValid ? null : <p className='alert alert-danger'>Please enter a valid email</p>}
-          </div>
-          <div className='mb-3'>
-            <label htmlFor='password' className='form-label'>Password </label>
-            <input type="password" id="password" value={password} className='form-control'
-              onChange={handlePasswordChange} placeholder='Enter password' required />
-            {isPasswordValid ? null : <p className='alert alert-danger'>Password must be at least 8 characters</p>}
-          </div>
+<Card
+    className="my-2"
+    color="secondary"
+    outline
+    
+    style={{
+      width: '38rem'
+    }}
+  >
+    <CardHeader>
+      Header
+    </CardHeader>
+    <CardBody>
+      <CardTitle tag="h5">
+        Special Title Treatment
+      </CardTitle>
+      <CardText>
+      <Form>
+        <Row>
+          <Col md={6}>
+            <FormGroup>
+              <Label for="exampleEmail">Email</Label>
+              <Input
+                id="exampleEmail"
+                name="email"
+                placeholder="with a placeholder"
+                type="email"
+              />
+            </FormGroup>
+          </Col>
+          <Col md={6}>
+            <FormGroup>
+              <Label for="examplePassword">Password</Label>
+              <Input
+                id="examplePassword"
+                name="password"
+                placeholder="password placeholder"
+                type="password"
+              />
+            </FormGroup>
+          </Col>
+        </Row>
+        <FormGroup>
+          <Label for="exampleAddress">Address</Label>
+          <Input
+            id="exampleAddress"
+            name="address"
+            placeholder="1234 Main St"
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="exampleAddress2">Address 2</Label>
+          <Input
+            id="exampleAddress2"
+            name="address2"
+            placeholder="Apartment, studio, or floor"
+          />
+        </FormGroup>
+        <Row>
+          <Col md={6}>
+            <FormGroup>
+              <Label for="exampleCity">City</Label>
+              <Input id="exampleCity" name="city" />
+            </FormGroup>
+          </Col>
+          <Col md={4}>
+            <FormGroup>
+              <Label for="exampleState">State</Label>
+              <Input id="exampleState" name="state" />
+            </FormGroup>
+          </Col>
+          <Col md={2}>
+            <FormGroup>
+              <Label for="exampleZip">Zip</Label>
+              <Input id="exampleZip" name="zip" />
+            </FormGroup>
+          </Col>
+        </Row>
+        <FormGroup check>
+          <Input id="exampleCheck" name="check" type="checkbox" />
+          <Label check for="exampleCheck">
+            Check me out
+          </Label>
+        </FormGroup>
+        <Button>Sign in</Button>
+      </Form>
+      </CardText>
+    </CardBody>
+  </Card>
 
-          {/* <div className='form-group mb-4'>
-            <label htmlFor='confirm_password' className='form-label'>Confirm password </label>
-            <input type="password" id="confirm_password" value={confirmPassword} className='form-control'
-              onChange={(event) => setConfirmPassword(event.target.value)}
-              onBlur={() => {
-                if (password !== confirmPassword) setErrors({ confirmPassword: 'Passwords must be matched' });
-                else setErrors({});
-              }} placeholder='Re-enter password' required />
-            {errors.confirmPassword && (<p className='alert alert-danger' role='alert'>{errors.confirmPassword}</p>)}
-          </div> */}
-          <div className='mb-3 form-check'>
-            <input type="checkbox" className='form-check-input' />
-            <label htmlFor='check' className='form-check-label'>Remeber login</label>
-          </div>
-          <button type="submit" className="btn btn-success mt-2" disabled={!isEmailValid || !isPasswordValid}>Sign-in</button>
-        </form>
-      </div>
-    </div>
-  )
+
+
+      
+  );
 }
-
-export default Login
