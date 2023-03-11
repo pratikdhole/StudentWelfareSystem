@@ -1,6 +1,7 @@
-import '../assets/layout.scss';
+import '../assets/Layout.scss';
 import { Link } from "react-router-dom";
 import React, { useState } from 'react'
+import logo from '../images/logo.png'
 
 function Header() {
   return (

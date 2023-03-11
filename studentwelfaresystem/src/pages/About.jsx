@@ -1,5 +1,5 @@
 import React from "react";
-import Base from "../layouts/Base";
+import Base from "../layout/Base.jsx";
 
 function About() {
   return (

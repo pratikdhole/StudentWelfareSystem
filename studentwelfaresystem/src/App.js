@@ -5,10 +5,10 @@ import About from './pages/About';
 import Signup from './pages/Signup'
 import Home from './pages/Home';
 import Footer from './layout/Footer';
-import Postproperty from './pages/Postproperty';
-import ViewProperty from './pages/ViewProperty';
 import "bootstrap/dist/css/bootstrap.min.css"
-import Login from './pages/login';
+import Login from './pages/Login';
+import ViewPG from './pages/ViewPG'
+import UploadPG from './pages/UploadPG'
 
 function App() {
   return (
