@@ -1,100 +1,151 @@
-import React from "react";
-import { Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import {
+  Label,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Row,
+  Button,
+} from "reactstrap";
+import { loginUser } from "../services/user-service";
+import { doLogin } from "./auth";
+import { useNavigate } from "react-router-dom";
+import userContext from "./context/userContext";
+import { useContext } from "react";
 
-export default function login() {
+const Login = () => {
+  const userContxtData = useContext(userContext);
+
+  const navigate = useNavigate();
+
+  const [loginDetail, setLoginDetail] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleChange = (event, field) => {
+    let actualValue = event.target.value;
+    setLoginDetail({
+      ...loginDetail,
+      [field]: actualValue,
+    });
+  };
+
+  const handleReset = () => {
+    setLoginDetail({
+      username: "",
+      password: "",
+    });
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    console.log(loginDetail);
+    //validation
+    if (
+      loginDetail.username.trim() == "" ||
+      loginDetail.password.trim() == ""
+    ) {
+      toast.error("Username or Password  is required !!");
+      return;
+    }
+
+    //submit the data to server to generate token
+    loginUser(loginDetail)
+      .then((data) => {
+        console.log(data);
+
+        //save the data to localstorage
+        doLogin(data, () => {
+          console.log("login detail is saved to localstorage");
+          //redirect to user dashboard page
+          userContxtData.setUser({
+            data: data.user,
+            login: true,
+          });
+          navigate("/user/dashboard");
+        });
+
+        toast.success("Login Success");
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status == 400 || error.response.status == 404) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("Something went wrong  on sever !!");
+        }
+      });
+  };
+
   return (
-<Card
-    className="my-2"
-    color="secondary"
-    outline
-    
-    style={{
-      width: '38rem'
-    }}
-  >
-    <CardHeader>
-      Header
-    </CardHeader>
-    <CardBody>
-      <CardTitle tag="h5">
-        Special Title Treatment
-      </CardTitle>
-      <CardText>
-      <Form>
-        <Row>
-          <Col md={6}>
-            <FormGroup>
-              <Label for="exampleEmail">Email</Label>
-              <Input
-                id="exampleEmail"
-                name="email"
-                placeholder="with a placeholder"
-                type="email"
-              />
-            </FormGroup>
-          </Col>
-          <Col md={6}>
-            <FormGroup>
-              <Label for="examplePassword">Password</Label>
-              <Input
-                id="examplePassword"
-                name="password"
-                placeholder="password placeholder"
-                type="password"
-              />
-            </FormGroup>
+    <div>
+      <Container>
+        <Row className="mt-4">
+          <Col
+            sm={{
+              size: 6,
+              offset: 3,
+            }}
+          >
+            <Card color="dark" inverse>
+              <CardHeader>
+                <h3>Login Here !!</h3>
+              </CardHeader>
+
+              <CardBody>
+                <Form onSubmit={handleFormSubmit}>
+                  {/* Email field */}
+
+                  <FormGroup>
+                    <Label for="email">Enter Email</Label>
+                    <Input
+                      type="text"
+                      id="email"
+                      value={loginDetail.username}
+                      onChange={(e) => handleChange(e, "username")}
+                    />
+                  </FormGroup>
+
+                  {/* password field */}
+
+                  <FormGroup>
+                    <Label for="password">Enter password</Label>
+                    <Input
+                      type="password"
+                      id="password"
+                      value={loginDetail.password}
+                      onChange={(e) => handleChange(e, "password")}
+                    />
+                  </FormGroup>
+
+                  <Container className="text-center">
+                    <Button color="light" outline>
+                      Login
+                    </Button>
+                    <Button
+                      onClick={handleReset}
+                      className="ms-2"
+                      outline
+                      color="secondary"
+                    >
+                      Reset
+                    </Button>
+                  </Container>
+                </Form>
+              </CardBody>
+            </Card>
           </Col>
         </Row>
-        <FormGroup>
-          <Label for="exampleAddress">Address</Label>
-          <Input
-            id="exampleAddress"
-            name="address"
-            placeholder="1234 Main St"
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="exampleAddress2">Address 2</Label>
-          <Input
-            id="exampleAddress2"
-            name="address2"
-            placeholder="Apartment, studio, or floor"
-          />
-        </FormGroup>
-        <Row>
-          <Col md={6}>
-            <FormGroup>
-              <Label for="exampleCity">City</Label>
-              <Input id="exampleCity" name="city" />
-            </FormGroup>
-          </Col>
-          <Col md={4}>
-            <FormGroup>
-              <Label for="exampleState">State</Label>
-              <Input id="exampleState" name="state" />
-            </FormGroup>
-          </Col>
-          <Col md={2}>
-            <FormGroup>
-              <Label for="exampleZip">Zip</Label>
-              <Input id="exampleZip" name="zip" />
-            </FormGroup>
-          </Col>
-        </Row>
-        <FormGroup check>
-          <Input id="exampleCheck" name="check" type="checkbox" />
-          <Label check for="exampleCheck">
-            Check me out
-          </Label>
-        </FormGroup>
-        <Button>Sign in</Button>
-      </Form>
-      </CardText>
-    </CardBody>
-  </Card>
-
-
-
-      
+      </Container>
+    </div>
   );
-}
+};
+
+export default Login;

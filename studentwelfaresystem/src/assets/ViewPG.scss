@@ -54,5 +54,29 @@
   .pg-owner-details {
     margin-top: 10px;
   }
+ 
+// new css
+.view-pg{
+  border:1px solid #ccc;
+  .pg-name{
+    margin:0 20px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+  }
+  .pg-details{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;  margin: 10px;
+  
+  }
+  .pg-discrption{
+    display: flex;
+  }
+  .photo-gallry{
+    width: 300px;
+    padding: 10px;
+  }
+
+
 
 }
+
