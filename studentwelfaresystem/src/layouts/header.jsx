@@ -1,4 +1,4 @@
-import '../assets/Layout.scss';
+import '../assets/layout.scss';
 import { Link } from "react-router-dom";
 import React, { useState } from 'react'
 import logo from '../images/logo.png'

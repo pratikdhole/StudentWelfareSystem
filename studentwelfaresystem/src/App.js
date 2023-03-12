@@ -8,9 +8,9 @@ import Signup from './pages/Signup';
 import Home from './pages/Home';
 import ViewPG from './pages/ViewPG'
 import UploadPG from './pages/UploadPG'
-import Login from './pages/Login';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup />} />
           <Route path ='/viewproperty' element ={<ViewPG />} />
           <Route path='/postproperty' element={<UploadPG />} />
