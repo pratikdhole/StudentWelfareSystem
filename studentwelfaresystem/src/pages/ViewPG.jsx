@@ -100,7 +100,7 @@ const PropertyCard = ({
           <div className="dis-img">
             <div className="dis-img-section">
               <div className="discrption-flow">
-                <div class="py-0 pr-0.5p pl-3p bg-left"></div>
+                {/* <div class="py-0 pr-0.5p pl-3p bg-left"></div> */}
                 <div class="flex">
                   <div>
                     <div class="font-semibold">New</div>
@@ -112,7 +112,7 @@ const PropertyCard = ({
                   </div>
                 </div>
               </div>
-              <div className="discrption-flow">
+              {/* <div className="discrption-flow">
                 <div class="py-0 pr-0.5p pl-3p bg-left"></div>
                 <div class="flex">
                   <div>
@@ -124,7 +124,7 @@ const PropertyCard = ({
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
