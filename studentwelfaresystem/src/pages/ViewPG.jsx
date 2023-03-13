@@ -50,9 +50,7 @@ const ViewPG = () => {
         filter
       </div> */}
 
-      <div className="col-md-3 filter-container mt-3 justify-content-center">
-        
-      </div>
+      <div className="col-md-3 filter-container mt-3 justify-content-center"></div>
 
       <div className="col-md-9 property-listing">
         {properties.map((property) => (
@@ -94,13 +92,48 @@ const PropertyCard = ({
           </div>
         </div>
         <div className="pg-details-section d-flex p-3">
-          <div className="photo-section">
-            <img src={image} />
+          <div className="property-card text-justify">
+            <img src={image} alt={name} />
+            <div className="property-details">
+              <h1>{name}</h1>
+              <h5>{address}</h5>
+              <h4>Rs.{price}/month</h4>
+            </div>
+            <div className="property-amenities">
+              <div className="property-amenity-list-1">
+                <div className="amenity-box">
+                  Washing Machine
+                  <img src={washingmachine}></img>
+                </div>
+                <div className="amenity-box">
+                  Filter
+                  <img src={waterfilter}></img>
+                </div>
+              </div>
+              <div className="property-amenity-list-1">
+                <div className="amenity-box">
+                  Wifi
+                  <img src={wifi}></img>
+                </div>
+                <div className="amenity-box">
+                  Furniture
+                  <img src={furniture}></img>
+                </div>
+              </div>
+            </div>
+            <div className="mr-md-3 contact-box">
+              <button type="submit" className="btn btn-success mt-2 ">
+                Get contact details
+              </button>
+            </div>
           </div>
-          <div className="dis-img">
+          {/* <div className="photo-section">
+            <img src={image} />
+          </div> */}
+          {/* <div className="dis-img">
             <div className="dis-img-section">
               <div className="discrption-flow">
-                {/* <div class="py-0 pr-0.5p pl-3p bg-left"></div> */}
+                <div class="py-0 pr-0.5p pl-3p bg-left"></div>
                 <div class="flex">
                   <div>
                     <div class="font-semibold">New</div>
@@ -112,7 +145,7 @@ const PropertyCard = ({
                   </div>
                 </div>
               </div>
-              {/* <div className="discrption-flow">
+              <div className="discrption-flow">
                 <div class="py-0 pr-0.5p pl-3p bg-left"></div>
                 <div class="flex">
                   <div>
@@ -124,9 +157,9 @@ const PropertyCard = ({
                     </div>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
