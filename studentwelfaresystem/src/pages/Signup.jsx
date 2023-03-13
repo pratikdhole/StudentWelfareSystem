@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { signUp } from "../services/user-service";
+import React, { useState } from "react";
+import PGApiService from "../services/PGApiService";
+import "../assets/Signup.scss";
 import { toast } from "react-toastify";
 import {
   Button,
@@ -18,11 +19,11 @@ import {
 
 const Signup = () => {
   const [data, setData] = useState({
-    name: "",
+    fullName: "",
     email: "",
     password: "",
-    user_contact: "",
-    about: "",
+    contact: "",
+    userRole: "",
   });
 
   const [error, setError] = useState({
@@ -30,52 +31,96 @@ const Signup = () => {
     isError: false,
   });
 
-  // handle change
+  {
+    /* handle change */
+  }
   const handleChange = (event, property) => {
     //dynamic setting the values
     setData({ ...data, [property]: event.target.value });
   };
 
-  //reseting the form
+  {
+    /* reseting the form */
+  }
   const resetData = () => {
     setData({
-      name: "",
+      fullName: "",
       email: "",
       password: "",
-      user_contact: "",
-      about: "",
+      contact: "",
+      userRole: "",
     });
   };
 
-  //submit the form
-  const submitForm = (event) => {
+  {
+    /* submit the form */
+  }
+  // const submitForm = (event) => {
+  //   event.preventDefault();
+  //   //data validate
+
+  //   //call server api for sending data
+  //   signUp(data)
+  //     .then((resp) => {
+  //       console.log(resp);
+  //       console.log("success log");
+  //       toast.success("User is registered successfully !! user id " + resp.id);
+  //       setData({
+  //         fullName: "",
+  //         email: "",
+  //         password: "",
+  //         contact: "",
+  //         userRole: "",
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       console.log("Error log");
+  //       //handle errors in proper way
+  //       setError({
+  //         errors: error,
+  //         isError: true,
+  //       });
+  //     });
+  // };
+
+  const addData = (event) => {
     event.preventDefault();
-
-    // if(error.isError){
-    //   toast.error("Form data is invalid , correct all details then submit. ");
-    //   setError({...error,isError:false})
-    //   return;
-    // }
-
-    console.log(data);
-    //data validate
-
-    //call server api for sending data
-    signUp(data)
-      .then((resp) => {
-        console.log(resp);
-        console.log("success log");
-        toast.success("User is registered successfully !! user id " + resp.id);
+    if (
+      data.fullName === "" ||
+      data.email === "" ||
+      data.password === "" ||
+      data.contact === "" ||
+      data.userRole === ""
+    ) {
+      toast.error("Plase enter valid data.."); //{ position: toast.POSITION.CENTER_LEFT });
+      return;
+    }
+    let registerData1 = {
+      fullName: data.fullName,
+      email: data.email,
+      password: data.password,
+      contact: data.contact,
+      userRole: data.userRole,
+    };
+    PGApiService.addUser(registerData1)
+      .then((result) => {
+        console.log(result);
+        toast.success(
+          "Registration successful..!"
+        );
         setData({
-          name: "",
+          fullName: "",
           email: "",
           password: "",
-          about: "",
+          contact: "",
+          userRole: "",
         });
       })
       .catch((error) => {
         console.log(error);
         console.log("Error log");
+        toast.error("Error 400/500..");
         //handle errors in proper way
         setError({
           errors: error,
@@ -87,11 +132,11 @@ const Signup = () => {
   return (
     <div>
       <Container>
-        <Row className="mt-4">
+        <Row className="mt-4 mb-4">
           {/* { JSON.stringify(data) } */}
 
           <Col sm={{ size: 6, offset: 3 }}>
-            <Card color="dark" inverse>
+            <Card className="shadow">
               <CardHeader>
                 <h3> Fill Information to Register !!</h3>
               </CardHeader>
@@ -99,40 +144,40 @@ const Signup = () => {
               <CardBody>
                 {/* creating form */}
 
-                <Form onSubmit={submitForm}>
+                <Form action="/">
                   {/* Name field */}
                   <FormGroup>
-                    <Label for="name">Enter Name</Label>
+                    <Label for="name">Enter name</Label>
                     <Input
                       type="text"
-                      placeholder="Enter here"
+                      placeholder="Enter name"
                       id="name"
-                      onChange={(e) => handleChange(e, "name")}
-                      value={data.name}
+                      name="fullName"
+                      onChange={(e) => handleChange(e, "fullName")}
+                      value={data.fullName}
                       invalid={
-                        error.errors?.response?.data?.name ? true : false
+                        error.errors?.response?.data?.fullName ? true : false
                       }
                     />
-
                     <FormFeedback>
-                      {error.errors?.response?.data?.name}
+                      {error.errors?.response?.data?.fullName}
                     </FormFeedback>
                   </FormGroup>
 
                   {/* email field */}
                   <FormGroup>
-                    <Label for="email">Enter Email</Label>
+                    <Label for="email">Enter email</Label>
                     <Input
                       type="email"
-                      placeholder="Enter here"
+                      placeholder="Enter email"
                       id="email"
+                      name="email"
                       onChange={(e) => handleChange(e, "email")}
                       value={data.email}
                       invalid={
                         error.errors?.response?.data?.email ? true : false
                       }
                     />
-
                     <FormFeedback>
                       {error.errors?.response?.data?.email}
                     </FormFeedback>
@@ -145,13 +190,13 @@ const Signup = () => {
                       type="password"
                       placeholder="Enter here"
                       id="password"
+                      name="password"
                       onChange={(e) => handleChange(e, "password")}
                       value={data.password}
                       invalid={
                         error.errors?.response?.data?.password ? true : false
                       }
                     />
-
                     <FormFeedback>
                       {error.errors?.response?.data?.password}
                     </FormFeedback>
@@ -159,25 +204,60 @@ const Signup = () => {
 
                   {/* contact field */}
                   <FormGroup>
-                    <Label for="user_contact">Enter phone</Label>
+                    <Label for="contact">Enter phone</Label>
                     <Input
                       type="number"
                       placeholder="Enter here"
-                      id="user_contact"
-                      onChange={(e) => handleChange(e, "user_contact")}
-                      value={data.phone}
+                      id="contact"
+                      name="contact"
+                      onChange={(e) => handleChange(e, "contact")}
+                      value={data.contact}
                       invalid={
-                        error.errors?.response?.data?.user_contact ? true : false
+                        error.errors?.response?.data?.contact ? true : false
                       }
                     />
-
                     <FormFeedback>
-                      {error.errors?.response?.data?.phone}
+                      {error.errors?.response?.data?.contact}
+                    </FormFeedback>
+                  </FormGroup>
+
+                  {/* user role field */}
+                  <FormGroup>
+                    <Container className="text-center">
+                    <Label for="userRole">Select role</Label>&nbsp;&nbsp;
+                      <Input
+                        type="radio"
+                        placeholder="Enter here"
+                        id="admin"
+                        name="userRole"
+                        // onChange={(e) => handleChange(e, "userRole")}
+                        onChange={(e) => handleChange(e, "userRole")}
+                        value="ADMIN"
+                        invalid={
+                          error.errors?.response?.data?.userRole ? true : false
+                        }
+                      />
+                      &nbsp;&nbsp; Admin &nbsp;&nbsp;
+                      <Input
+                        type="radio"
+                        placeholder="Enter here"
+                        id="user"
+                        name="userRole"
+                        onChange={(e) => handleChange(e, "userRole")}
+                        value="USER"
+                        invalid={
+                          error.errors?.response?.data?.userRole ? true : false
+                        }
+                      />
+                      &nbsp;&nbsp;User&nbsp;&nbsp;&nbsp;
+                    </Container>
+                    <FormFeedback>
+                      {error.errors?.response?.data?.userRole}
                     </FormFeedback>
                   </FormGroup>
 
                   {/* about field */}
-                  <FormGroup>
+                  {/* <FormGroup>
                     <Label for="about">Write something about yourself</Label>
                     <Input
                       type="textarea"
@@ -190,19 +270,18 @@ const Signup = () => {
                         error.errors?.response?.data?.about ? true : false
                       }
                     />
-
                     <FormFeedback>
                       {error.errors?.response?.data?.about}
                     </FormFeedback>
-                  </FormGroup>
+                  </FormGroup> */}
 
                   <Container className="text-center">
-                    <Button outline color="light">
+                    <Button color="outline-success" onClick={addData}>
                       Register
                     </Button>
                     <Button
                       onClick={resetData}
-                      color="secondary"
+                      color="outline-danger"
                       type="reset"
                       className="ms-2"
                     >
@@ -218,5 +297,4 @@ const Signup = () => {
     </div>
   );
 };
-
 export default Signup;
