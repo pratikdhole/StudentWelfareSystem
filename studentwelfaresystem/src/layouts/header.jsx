@@ -5,10 +5,10 @@ import logo from '../images/logo.png'
 
 function Header() {
   return (
-    <div className="header">
+    <div className="margin-b">
       <div>
         <header>
-          <nav className="navbar navbar-expand-lg navbar-light shadow">
+          <nav className="header navbar navbar-expand-lg shadow fixed-top">
             <div className="container-fluid">
               <Link className="navbar-brand fw-bold fs-4" to="/">
                 {

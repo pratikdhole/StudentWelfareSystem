@@ -3,7 +3,7 @@ import '../assets/Layout.scss'
 function Footer() {
   return (
     <div className="margin-t">
-      <footer className="text-center text-lg-start footer-section">
+      <footer className="text-center text-lg-start footer-section fixed-bottom">
         <div className="container p-1">
           <div className="row">
             <div className="col-lg-8 col-md-12 mb-2 mb-md-0">

@@ -256,25 +256,6 @@ const Signup = () => {
                     </FormFeedback>
                   </FormGroup>
 
-                  {/* about field */}
-                  {/* <FormGroup>
-                    <Label for="about">Write something about yourself</Label>
-                    <Input
-                      type="textarea"
-                      placeholder="Enter here"
-                      id="about"
-                      style={{ height: "250px" }}
-                      onChange={(e) => handleChange(e, "about")}
-                      value={data.about}
-                      invalid={
-                        error.errors?.response?.data?.about ? true : false
-                      }
-                    />
-                    <FormFeedback>
-                      {error.errors?.response?.data?.about}
-                    </FormFeedback>
-                  </FormGroup> */}
-
                   <Container className="text-center">
                     <Button color="outline-success" onClick={addData}>
                       Register

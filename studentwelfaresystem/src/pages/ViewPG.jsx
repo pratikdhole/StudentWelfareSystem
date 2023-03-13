@@ -22,26 +22,6 @@ const ViewPG = () => {
       bathrooms: 2,
       bedrooms: 2,
     },
-
-    // {
-    //   name: "Flora PG",
-    //   address: "Aundh, Pune",
-    //   image: room2,
-    //   price: 10000,
-    //   size: "800 sqft",
-    //   bathrooms: 1,
-    //   bedrooms: 1,
-    // },
-    // {
-    //   name: "Kalyani PG",
-    //   address: "Panchvati, Pune",
-    //   image: room1,
-    //   price: 15000,
-    //   size: "1200 sqft",
-    //   bathrooms: 2,
-    //   bedrooms: 2,
-    // },
-    // add more properties as needed
   ]);
 
   return (
@@ -72,7 +52,7 @@ const PropertyCard = ({
 }) => {
   return (
     <div>
-      <div className="col-md-10 view-pg-section shadow-defaultCardShadow mt-3">
+      <div className="col-md-12 view-pg-section shadow-defaultCardShadow mt-3">
         <div className="pg-name">
           <h2>3 BHK Flat In Gangotri Grandeur, For Sale In Kormanagla</h2>
           <h4>4th block 8th A main</h4>
@@ -91,40 +71,53 @@ const PropertyCard = ({
             <div className="dpname">Rent/Month</div>
           </div>
         </div>
-        <div className="pg-details-section d-flex p-3">
-          <div className="property-card text-justify">
-            <img src={image} alt={name} />
-            <div className="property-details">
-              <h1>{name}</h1>
-              <h5>{address}</h5>
-              <h4>Rs.{price}/month</h4>
-            </div>
-            <div className="property-amenities">
-              <div className="property-amenity-list-1">
-                <div className="amenity-box">
-                  Washing Machine
-                  <img src={washingmachine}></img>
-                </div>
-                <div className="amenity-box">
-                  Filter
-                  <img src={waterfilter}></img>
-                </div>
-              </div>
-              <div className="property-amenity-list-1">
-                <div className="amenity-box">
-                  Wifi
-                  <img src={wifi}></img>
-                </div>
-                <div className="amenity-box">
-                  Furniture
-                  <img src={furniture}></img>
-                </div>
+        <div className="pg-details-section amenities-box p-3">
+          <div className="pg-description col-md-12">
+            <div className="photo-section col-md-4">
+              <div>
+                <img src={image} alt={name}/>
               </div>
             </div>
-            <div className="mr-md-3 contact-box">
-              <button type="submit" className="btn btn-success mt-2 ">
-                Get contact details
-              </button>
+            <div className="col-md-4">
+              <div className="row">
+                <div className="amenities">
+                  <img src={wifi} width="8%" alt={wifi} />
+                  &nbsp;&nbsp;Wifi
+                  <span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    | Yes
+                  </span>
+                </div>
+                <div className="amenities">
+                  <img src={washingmachine} width="8%" alt={washingmachine} />{" "}
+                  Laundry
+                  <span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+                    Yes
+                  </span>
+                </div>
+                <div className="amenities">
+                  <img src={furniture} width="8%" alt={furniture} />
+                  &nbsp;Furniture
+                  <span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+                    Yes
+                  </span>
+                </div>
+                <div className="amenities">
+                  <img src={waterfilter} width="8%" alt={waterfilter} />
+                  &nbsp;&nbsp;Water Filter
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Yes</span>
+                </div>
+              </div>
+              <Container className="text-center mb-2 py-2">
+                <button type="button" class="btn btn-outline-secondary">
+                  Get Owner Details
+                </button>
+              </Container>
+              {/* <div>
+            <button type="button" class="btn btn-outline-info">Get Owner Details</button>
+          </div> */}
             </div>
           </div>
           {/* <div className="photo-section">

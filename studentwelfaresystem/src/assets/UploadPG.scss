@@ -1,0 +1,46 @@
+.uploadPG{
+    
+    form {
+        margin: 20px auto;
+        width: 50%;
+        background-color: antiquewhite;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: justify;
+        box-shadow: 10px 10px 3px rgba(195, 190, 190, 0.3);
+    }
+    
+    label {
+        display: block;
+        font-size: 18px;
+    }
+
+    input[type="text"], select {
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        margin-top: 20px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+}
+
+
+
+
+
+
+
